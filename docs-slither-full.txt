@@ -1,0 +1,487 @@
+'forge clean' running (wd: C:\Users\dunam\OneDrive\Desktop\20 Project\1 Ledgerline\contracts)
+'forge config --json' running
+'forge build --build-info --deny never --skip ./test/** ./script/** --force' running (wd: C:\Users\dunam\OneDrive\Desktop\20 Project\1 Ledgerline\contracts)
+INFO:Detectors:
+Detector: events-maths
+ProjectTokenHooks.notifyReward(uint256) (src/token/ProjectTokenHooks.sol#181-187) should emit an event for: 
+	- queuedRewards += amount (src/token/ProjectTokenHooks.sol#186-187) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+INFO:Detectors:
+Detector: missing-zero-check
+OracleAdapter.setSequencerFeed(address,uint32).feed (src/risk/OracleAdapter.sol#73) lacks a zero-check on :
+		- sequencerFeed = feed (src/risk/OracleAdapter.sol#76-77)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+Detector: calls-loop
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		PoolBase._accountData(address)
+LiquidationLogic._maybeWriteOff(address) (src/core/LiquidationLogic.sol#201-218) has external calls inside a loop: IReceiptToken($.reserves[$.reservesList[i]].receiptToken).balanceOf(user) > 0 (src/core/LiquidationLogic.sol#208-210)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+LiquidationLogic._writeOff(address,address) (src/core/LiquidationLogic.sol#222-246) has external calls inside a loop: scaled = dt.scaledBalanceOf(user) (src/core/LiquidationLogic.sol#227)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		LiquidationLogic._maybeWriteOff(address)
+LiquidationLogic._writeOff(address,address) (src/core/LiquidationLogic.sol#222-246) has external calls inside a loop: dt.burnScaled(user,scaled,r.borrowIndex) (src/core/LiquidationLogic.sol#229-230)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		LiquidationLogic._maybeWriteOff(address)
+LiquidationLogic._writeOff(address,address) (src/core/LiquidationLogic.sol#222-246) has external calls inside a loop: covered = MathLib.min(IERC20(asset).balanceOf(address($.reserve)),amount) (src/core/LiquidationLogic.sol#232-233)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		LiquidationLogic._maybeWriteOff(address)
+LiquidationLogic._writeOff(address,address) (src/core/LiquidationLogic.sol#222-246) has external calls inside a loop: totalShares = IReceiptToken(r.receiptToken).totalSupply() + r.accruedToTreasuryScaled (src/core/LiquidationLogic.sol#237-238)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+		LiquidationLogic._liquidate(LiquidationLogic.Params)
+		LiquidationLogic._maybeWriteOff(address)
+LiquidationLogic._liquidate(LiquidationLogic.Params) (src/core/LiquidationLogic.sol#78-115) has external calls inside a loop: res.coverBadDebt(covers[i].asset,covers[i].amount) != covers[i].amount (src/core/LiquidationLogic.sol#113-114)
+	Calls stack containing the loop:
+		LiquidationLogic.liquidate(address,address,address,uint256,bool,address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.withdraw(address,uint256,address)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.withdraw(address,uint256,address)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.withdraw(address,uint256,address)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.withdraw(address,uint256,address)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.withdraw(address,uint256,address)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.withdraw(address,uint256,address)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.vaultWithdraw(address,address,address,uint256,bool)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.vaultWithdraw(address,address,address,uint256,bool)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.vaultWithdraw(address,address,address,uint256,bool)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.vaultWithdraw(address,address,address,uint256,bool)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.vaultWithdraw(address,address,address,uint256,bool)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.vaultWithdraw(address,address,address,uint256,bool)
+		Pool._withdraw(address,address,address,uint256,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.borrow(address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.borrow(address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.borrow(address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.borrow(address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.borrow(address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.borrow(address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: scaledDebt = IDebtToken(r.debtToken).scaledTotalSupply() (src/core/PoolBase.sol#77)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: totalShares = IReceiptToken(r.receiptToken).totalSupply() + treasuryScaled (src/core/PoolBase.sol#88-89)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.setUseAsCollateral(address,bool)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+Pool.setEMode(uint8) (src/core/Pool.sol#221-236) has external calls inside a loop: _isBorrowing(cfg,i) && $.assetConfig.getRiskParams($.reservesList[i]).eModeCategory != category (src/core/Pool.sol#232-233)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: scaledDebt = IDebtToken(r.debtToken).scaledTotalSupply() (src/core/PoolBase.sol#77)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: totalShares = IReceiptToken(r.receiptToken).totalSupply() + treasuryScaled (src/core/PoolBase.sol#88-89)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.setEMode(uint8)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: scaledDebt = IDebtToken(r.debtToken).scaledTotalSupply() (src/core/PoolBase.sol#77)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: totalShares = IReceiptToken(r.receiptToken).totalSupply() + treasuryScaled (src/core/PoolBase.sol#88-89)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.finalizeTransfer(address,address,address,uint256)
+		PoolBase._requireSolvent(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: p = $.assetConfig.getRiskParams(asset) (src/core/PoolBase.sol#205)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: scaledDebt = IDebtToken(r.debtToken).scaledTotalSupply() (src/core/PoolBase.sol#77)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) has external calls inside a loop: totalShares = IReceiptToken(r.receiptToken).totalSupply() + treasuryScaled (src/core/PoolBase.sol#88-89)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: price = $.oracle.getPrice(asset) (src/core/PoolBase.sol#207)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: dec = IERC20Metadata(asset).decimals() (src/core/PoolBase.sol#207-208)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: v = _valueUsd(IReceiptToken(r.receiptToken).balanceOf(c.user).rayMulDown(li),price,dec) (src/core/PoolBase.sol#209-210)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+PoolBase._effectiveParams(Types.RiskParams,uint8,bool) (src/core/PoolBase.sol#153-168) has external calls inside a loop: e = _s().assetConfig.getEModeCategory(userEMode) (src/core/PoolBase.sol#163-165)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+		PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) has external calls inside a loop: debt = IDebtToken(r.debtToken).scaledBalanceOf(c.user).rayMulUp(bi) (src/core/PoolBase.sol#216-217)
+	Calls stack containing the loop:
+		Pool.getUserAccountData(address)
+		PoolBase._accountData(address)
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: r = POOL.getReserveData(asset) (src/periphery/PoolLens.sol#75)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: m.symbol = IERC20Metadata(asset).symbol() (src/periphery/PoolLens.sol#76)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: m.decimals = IERC20Metadata(asset).decimals() (src/periphery/PoolLens.sol#77-78)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: m.totalSupply = POOL.totalSupplyAssets(asset) (src/periphery/PoolLens.sol#80-81)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: m.totalDebt = POOL.totalDebt(asset) (src/periphery/PoolLens.sol#81-82)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: m.params = cfg.getRiskParams(asset) (src/periphery/PoolLens.sol#82-83)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens._market(address,IAssetConfig,IPriceOracle) (src/periphery/PoolLens.sol#72-94) has external calls inside a loop: p = oracle.getPrice(asset) (src/periphery/PoolLens.sol#90-94)
+	Calls stack containing the loop:
+		PoolLens.getMarkets()
+PoolLens.getUserPositions(address) (src/periphery/PoolLens.sol#94-117) has external calls inside a loop: r = POOL.getReserveData(list[i]) (src/periphery/PoolLens.sol#107-108)
+PoolLens.getUserPositions(address) (src/periphery/PoolLens.sol#94-117) has external calls inside a loop: positions[i] = Position({asset:list[i],supplied:IReceiptToken(r.receiptToken).balanceOf(user).rayMulDown(POOL.getNormalizedIncome(list[i])),borrowed:IDebtToken(r.debtToken).scaledBalanceOf(user).rayMulUp(POOL.getNormalizedDebt(list[i])),collateral:(cfgBits >> (i * 2 + 1)) & 1 == 1}) (src/periphery/PoolLens.sol#108-113)
+PoolLens.getHealthFactors(address[]) (src/periphery/PoolLens.sol#120-127) has external calls inside a loop: a = POOL.getUserAccountData(users[i]) (src/periphery/PoolLens.sol#124-127)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+INFO:Detectors:
+Detector: reentrancy-benign
+Reentrancy in AssetConfig.setRiskParams(address,Types.RiskParams) (src/core/AssetConfig.sol#66-71):
+	External calls:
+	- pool.accrue(asset) (src/core/AssetConfig.sol#68)
+	State variables written after the call(s):
+	- _params[asset] = p (src/core/AssetConfig.sol#68-69)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+Detector: reentrancy-events
+Reentrancy in PoolBase._applyDiscount(address,Types.ReserveData,address,uint256) (src/core/PoolBase.sol#243-269):
+	External calls:
+	- dt.burnScaled(user,debtScaled,bi) (src/core/PoolBase.sol#267-268)
+	Event emitted after the call(s):
+	- IPool.BorrowDiscountApplied(asset,user,rebate) (src/core/PoolBase.sol#268-269)
+Reentrancy in LiquidationLogic._liquidate(LiquidationLogic.Params) (src/core/LiquidationLogic.sol#78-115):
+	External calls:
+	- _applyDiscount(q.debtAsset,dr,q.user,_s().assetConfig.getRiskParams(q.debtAsset).reserveFactorBps) (src/core/LiquidationLogic.sol#88-89)
+		- dt.setUserIndex(user,bi) (src/core/PoolBase.sol#248-249)
+		- dt.burnScaled(user,debtScaled,bi) (src/core/PoolBase.sol#267-268)
+		- dt.setUserIndex(user,bi) (src/core/PoolBase.sol#269)
+	- IDebtToken(dr.debtToken).burnScaled(q.user,burnDebt,dr.borrowIndex) (src/core/LiquidationLogic.sol#94)
+	- _seize(q.collateralAsset,cr,q.user,q.liquidator,q.receiveReceipt,v) (src/core/LiquidationLogic.sol#97-100)
+		- rt.poolTransfer(user,_s().feeCollector,v.feeShares) (src/core/LiquidationLogic.sol#180-181)
+		- rt.poolTransfer(user,liquidator,v.liquidatorShares) (src/core/LiquidationLogic.sol#183-184)
+		- rt.burnShares(user,v.liquidatorShares) (src/core/LiquidationLogic.sol#191-193)
+	Event emitted after the call(s):
+	- IPool.CollateralToggled(asset,liquidator,true) (src/core/LiquidationLogic.sol#187)
+		- _seize(q.collateralAsset,cr,q.user,q.liquidator,q.receiveReceipt,v) (src/core/LiquidationLogic.sol#97-100)
+	- IPool.CollateralToggled(asset,user,false) (src/core/LiquidationLogic.sol#196)
+		- _seize(q.collateralAsset,cr,q.user,q.liquidator,q.receiveReceipt,v) (src/core/LiquidationLogic.sol#97-100)
+Reentrancy in LiquidationLogic._liquidate(LiquidationLogic.Params) (src/core/LiquidationLogic.sol#78-115):
+	External calls:
+	- _applyDiscount(q.debtAsset,dr,q.user,_s().assetConfig.getRiskParams(q.debtAsset).reserveFactorBps) (src/core/LiquidationLogic.sol#88-89)
+		- dt.setUserIndex(user,bi) (src/core/PoolBase.sol#248-249)
+		- dt.burnScaled(user,debtScaled,bi) (src/core/PoolBase.sol#267-268)
+		- dt.setUserIndex(user,bi) (src/core/PoolBase.sol#269)
+	- IDebtToken(dr.debtToken).burnScaled(q.user,burnDebt,dr.borrowIndex) (src/core/LiquidationLogic.sol#94)
+	- _seize(q.collateralAsset,cr,q.user,q.liquidator,q.receiveReceipt,v) (src/core/LiquidationLogic.sol#97-100)
+		- rt.poolTransfer(user,_s().feeCollector,v.feeShares) (src/core/LiquidationLogic.sol#180-181)
+		- rt.poolTransfer(user,liquidator,v.liquidatorShares) (src/core/LiquidationLogic.sol#183-184)
+		- rt.burnShares(user,v.liquidatorShares) (src/core/LiquidationLogic.sol#191-193)
+	- (covers,nCovers) = _maybeWriteOff(q.user) (src/core/LiquidationLogic.sol#101-103)
+		- dt.burnScaled(user,scaled,r.borrowIndex) (src/core/LiquidationLogic.sol#229-230)
+	Event emitted after the call(s):
+	- IPool.BadDebtWrittenOff(asset,user,amount,covered,socialized) (src/core/LiquidationLogic.sol#245-246)
+		- (covers,nCovers) = _maybeWriteOff(q.user) (src/core/LiquidationLogic.sol#101-103)
+	- IPool.Liquidation(q.collateralAsset,q.debtAsset,q.user,q.liquidator,v.repay,v.seize,v.protocolFee,q.receiveReceipt) (src/core/LiquidationLogic.sol#119-123)
+		- _emitLiquidation(q,v) (src/core/LiquidationLogic.sol#103-104)
+	- IPool.ReserveAccrued(asset,li,bi,r.borrowRateRay) (src/core/PoolBase.sol#105-106)
+		- (covers,nCovers) = _maybeWriteOff(q.user) (src/core/LiquidationLogic.sol#101-103)
+Reentrancy in LiquidationLogic._seize(address,Types.ReserveData,address,address,bool,LiquidationLogic.Vars) (src/core/LiquidationLogic.sol#167-197):
+	External calls:
+	- rt.poolTransfer(user,_s().feeCollector,v.feeShares) (src/core/LiquidationLogic.sol#180-181)
+	- rt.poolTransfer(user,liquidator,v.liquidatorShares) (src/core/LiquidationLogic.sol#183-184)
+	Event emitted after the call(s):
+	- IPool.CollateralToggled(asset,liquidator,true) (src/core/LiquidationLogic.sol#187)
+Reentrancy in LiquidationLogic._seize(address,Types.ReserveData,address,address,bool,LiquidationLogic.Vars) (src/core/LiquidationLogic.sol#167-197):
+	External calls:
+	- rt.poolTransfer(user,_s().feeCollector,v.feeShares) (src/core/LiquidationLogic.sol#180-181)
+	- rt.poolTransfer(user,liquidator,v.liquidatorShares) (src/core/LiquidationLogic.sol#183-184)
+	- rt.burnShares(user,v.liquidatorShares) (src/core/LiquidationLogic.sol#191-193)
+	Event emitted after the call(s):
+	- IPool.CollateralToggled(asset,user,false) (src/core/LiquidationLogic.sol#196)
+Reentrancy in LiquidationLogic._writeOff(address,address) (src/core/LiquidationLogic.sol#222-246):
+	External calls:
+	- dt.burnScaled(user,scaled,r.borrowIndex) (src/core/LiquidationLogic.sol#229-230)
+	Event emitted after the call(s):
+	- IPool.BadDebtWrittenOff(asset,user,amount,covered,socialized) (src/core/LiquidationLogic.sol#245-246)
+Reentrancy in AssetConfig.setInterestRateModel(address,address) (src/core/AssetConfig.sol#75-82):
+	External calls:
+	- pool.accrue(asset) (src/core/AssetConfig.sol#79)
+	Event emitted after the call(s):
+	- InterestRateModelUpdated(asset,irm) (src/core/AssetConfig.sol#79-81)
+Reentrancy in AssetConfig.setRiskParams(address,Types.RiskParams) (src/core/AssetConfig.sol#66-71):
+	External calls:
+	- pool.accrue(asset) (src/core/AssetConfig.sol#68)
+	Event emitted after the call(s):
+	- RiskParamsUpdated(asset,p) (src/core/AssetConfig.sol#69-70)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+INFO:Detectors:
+Detector: timestamp
+PoolBase._previewIndices(Types.ReserveData,uint256) (src/core/PoolBase.sol#67-95) uses timestamp for comparisons
+	Dangerous comparisons:
+	- dt == 0 || r.borrowRateRay == 0 (src/core/PoolBase.sol#75-76)
+	- interest == 0 || totalShares == 0 (src/core/PoolBase.sol#89)
+	- debtAfter > debtBefore (src/core/PoolBase.sol#87)
+PoolBase._accrue(address,Types.ReserveData) (src/core/PoolBase.sol#95-106) uses timestamp for comparisons
+	Dangerous comparisons:
+	- r.lastUpdate == block.timestamp (src/core/PoolBase.sol#96-99)
+PoolBase._accumulate(Types.AccountData,PoolBase.AccountCtx,address,uint256) (src/core/PoolBase.sol#199-219) uses timestamp for comparisons
+	Dangerous comparisons:
+	- v > 0 (src/core/PoolBase.sol#211)
+MarketClock.isOpenAt(uint256) (src/risk/MarketClock.sol#91-102) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (tradingDaysMask >> weekday) & 1 == 0 (src/risk/MarketClock.sol#96-97)
+	- minute >= openMinute && minute < close (src/risk/MarketClock.sol#101-102)
+MarketClock.utcOffsetAt(uint256) (src/risk/MarketClock.sol#104-113) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ts >= start && ts < end (src/risk/MarketClock.sol#112-113)
+MarketClock.civilFromDays(uint256) (src/risk/MarketClock.sol#129-141) uses timestamp for comparisons
+	Dangerous comparisons:
+	- m <= 2 (src/risk/MarketClock.sol#140-141)
+	- mp < 10 (src/risk/MarketClock.sol#140)
+OracleAdapter._read(address,uint256) (src/risk/OracleAdapter.sol#122-132) uses timestamp for comparisons
+	Dangerous comparisons:
+	- answer <= 0 || updatedAt == 0 || updatedAt > block.timestamp || answeredInRound < roundId (src/risk/OracleAdapter.sol#125)
+	- block.timestamp - updatedAt > maxAge (src/risk/OracleAdapter.sol#126)
+OracleAdapter._checkSequencer() (src/risk/OracleAdapter.sol#132-146) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp - startedAt <= sequencerGracePeriod (src/risk/OracleAdapter.sol#145)
+ProjectTokenHooks.withdrawUnstaked() (src/token/ProjectTokenHooks.sol#163-171) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < unstakeReadyAt[msg.sender] (src/token/ProjectTokenHooks.sol#168)
+FeeCollector.swapToStable(address,uint256,uint256,uint256) (src/treasury/FeeCollector.sol#107-128) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > deadline (src/treasury/FeeCollector.sol#110-111)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Slither:. analyzed (64 contracts with 75 detectors), 94 result(s) found
