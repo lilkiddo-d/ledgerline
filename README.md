@@ -91,7 +91,7 @@ Rate models: USDG is 0% → 6% at 90% utilization → 66% at 100%. Stocks are 2%
 
 | Check | Result |
 |---|---|
-| Unit + fuzz + invariant tests | 98 passed |
+| Unit + fuzz + invariant tests | 97 passed, 0 failed (5 fork tests skip without an RPC URL) |
 | Fork tests (live USDG, AAPL, NVDA, MSFT + Chainlink) | 5 passed |
 | Line coverage, core contracts | 98.7–100% (see below) |
 | Slither high/medium | 0 |
