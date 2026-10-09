@@ -44,6 +44,16 @@ cd contracts && LEDGERLINE_GOVERNANCE=0xYourGovernanceMultisig forge script scri
 
 You'll be asked for the keystore password twice: once to print the sender address, once to sign.
 
+**Windows PowerShell 5.1.** It has no `&&` and no `NAME=value command` syntax, so run each line separately:
+
+```powershell
+cd contracts
+$DEPLOYER = cast wallet address --account ledgerline-deployer
+cast balance $DEPLOYER --ether --rpc-url https://rpc.mainnet.chain.robinhood.com
+$env:LEDGERLINE_GOVERNANCE = "0xYourRealMultisig"   # omit to use the deployer as governance
+forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account ledgerline-deployer --sender $DEPLOYER --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/ --slow --gas-estimate-multiplier 200
+```
+
 What it does:
 
 1. **Preflight.** Checks chain ID 4663, that every token and feed has code, the token decimals and that every live price is fresh.
@@ -61,7 +71,7 @@ Optional env vars: `LEDGERLINE_GUARDIAN`, `LEDGERLINE_TREASURY`, `LEDGERLINE_KEE
 **If verification fails.** Blockscout sits behind a Cloudflare challenge that blocked API requests from the machine used for the dry runs, so `--verify` may fail. Your contracts are still deployed. First retry verification only (nothing is redeployed):
 
 ```bash
-cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account ledgerline-deployer --sender $(cast wallet address --account ledgerline-deployer) --resume --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
+cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account ledgerline-deployer --sender $(cast wallet address --account ledgerline-deployer) --resume --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
 ```
 
 If that still fails, verify manually in the browser. Run `bash scripts/verification-inputs.sh`, which writes `deployments/verify/<Contract>.json`. Then, for each address in `deployments/4663.json`, open its Blockscout page and choose **Verify & Publish** → **Solidity (Standard JSON input)**, compiler **v0.8.28**, and upload the matching file. Constructor arguments are read from the creation transaction.
