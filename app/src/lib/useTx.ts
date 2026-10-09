@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePublicClient, useWriteContract } from "wagmi";
+import { useAccount, usePublicClient, useWriteContract } from "wagmi";
 import { BaseError, ContractFunctionRevertedError, type Abi } from "viem";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -22,6 +22,7 @@ export function errorMessage(e: unknown): string {
 /** Sends a sequence of contract writes, waiting for each receipt, then refreshes all queries. */
 export function useTxRunner() {
   const { writeContractAsync } = useWriteContract();
+  const { address } = useAccount();
   const client = usePublicClient();
   const qc = useQueryClient();
   const [state, setState] = useState<TxState>({ status: "idle" });
@@ -33,7 +34,22 @@ export function useTxRunner() {
       let hash: `0x${string}` | undefined;
       for (const s of steps) {
         setState({ status: "pending", message: `${s.label}: confirm in wallet…` });
-        hash = await writeContractAsync({ address: s.address, abi: s.abi, functionName: s.functionName, args: s.args } as never);
+        // Gas depends on elapsed time (interest accrual runs once per block), so a same-block
+        // estimate can come in low. Pad it by 30%; unused gas is not charged.
+        const estimate = await client!.estimateContractGas({
+          account: address,
+          address: s.address,
+          abi: s.abi,
+          functionName: s.functionName,
+          args: s.args,
+        } as never);
+        hash = await writeContractAsync({
+          address: s.address,
+          abi: s.abi,
+          functionName: s.functionName,
+          args: s.args,
+          gas: (estimate * 13n) / 10n,
+        } as never);
         setState({ status: "pending", message: `${s.label}: waiting for confirmation…`, hash });
         const receipt = await client!.waitForTransactionReceipt({ hash });
         if (receipt.status !== "success") throw new Error(`${s.label} reverted`);
