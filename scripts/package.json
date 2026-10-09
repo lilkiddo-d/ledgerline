@@ -1,0 +1,8 @@
+{
+  "name": "@ledgerline/scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "export-abis": "node export-abis.mjs"
+  }
+}

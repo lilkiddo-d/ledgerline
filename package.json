@@ -1,0 +1,16 @@
+{
+  "name": "ledgerline",
+  "private": true,
+  "packageManager": "pnpm@10.18.0",
+  "scripts": {
+    "contracts:build": "cd contracts && forge build --sizes",
+    "contracts:test": "cd contracts && forge test",
+    "contracts:fork-test": "cd contracts && forge test --match-path \"test/fork/*\"",
+    "contracts:coverage": "cd contracts && forge coverage --report summary --no-match-coverage \"(test|script)\"",
+    "contracts:slither": "cd contracts && slither .",
+    "abis": "pnpm --filter @ledgerline/scripts export-abis",
+    "app:dev": "pnpm --filter @ledgerline/app dev",
+    "app:build": "pnpm --filter @ledgerline/app build",
+    "app:start": "pnpm --filter @ledgerline/app start"
+  }
+}

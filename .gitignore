@@ -13,3 +13,9 @@ slither-hm.txt
 slither-report.txt
 deployments/*.dryrun.json
 .vercel
+.fork/
+app/.env.local
+app/next-env.d.ts
+app/tsconfig.tsbuildinfo
+fork-*.log
+dryrun.log

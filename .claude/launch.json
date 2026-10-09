@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ledgerline-app",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["app/node_modules/next/dist/bin/next", "start", "app", "-p", "3100"],
+      "port": 3100
+    }
+  ]
+}

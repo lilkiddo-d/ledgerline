@@ -80,7 +80,9 @@ contract Deploy is Script, RobinhoodDeployment {
 
     function _json(Deployment memory d, Config memory c, Listing[] memory l) internal view returns (string memory) {
         string memory s = string.concat(
-            '{"name":"Ledgerline","chainId":',
+            '{"name":"Ledgerline","deployment":"',
+            vm.envOr("DEPLOYMENT_NAME", vm.toString(block.chainid)),
+            '","chainId":',
             vm.toString(block.chainid),
             ',"deployedAtBlock":',
             vm.toString(startBlock),
