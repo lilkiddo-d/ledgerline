@@ -86,4 +86,7 @@ One line of reasoning per decision. Newest decisions are grouped by area, not by
 - **`RobinhoodDeployment.sol` is shared by `Deploy.s.sol` and the fork tests.** Fork tests then exercise the exact production deploy path. Instantiating the script contract in a test exceeds EIP-3860 initcode limits.
 - **The frontend is Next 16, wagmi 2 and RainbowKit 2.** RainbowKit 2.2 peers on wagmi ^2.9, so wagmi 3 is deliberately not used.
 - **A dev-only `mock` connector exists for an impersonated anvil account.** It is enabled only when `NEXT_PUBLIC_DEV_MOCK_ACCOUNT` is set and the RPC is localhost, so the fork can be driven end-to-end without any private key.
+- **The frontend pads every gas estimate by 30%.** Interest accrual runs once per block, so an estimate taken in the same block as the previous action comes in low. The fork test hit exactly this: a borrow ran out of gas inside the USDG transfer. Unused gas isn't charged.
+- **The local fork snapshot pins every touched contract via `prestateTracer`.** anvil's fork-mode dump omits state that was only read from upstream (proxy implementations, aggregators, Multicall3).
+- **Manual verification fallback.** Blockscout's Cloudflare challenge can block `forge --verify`, so `scripts/verification-inputs.sh` exports standard-JSON inputs for browser upload.
 - **The liquidations page scans `Borrow` events in 200k-block chunks, up to 10M blocks back.** That is enough for a UI. Production liquidators should run an indexer and a bot (docs/LIQUIDATIONS.md).

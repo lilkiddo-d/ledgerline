@@ -96,8 +96,9 @@ Rate models: USDG is 0% → 6% at 90% utilization → 66% at 100%. Stocks are 2%
 | Line coverage, core contracts | 98.7–100% (see below) |
 | Slither high/medium | 0 |
 | Anvil fork deploy (broadcast) | succeeded |
-| Mainnet dry run (no broadcast) | `SIMULATION COMPLETE`, ~64.7M gas, ~0.0027 ETH |
+| Mainnet dry run (no broadcast) | `SIMULATION COMPLETE`, ~65.2M gas, ~0.0026 ETH |
 | Frontend `next build` | passes (TypeScript strict) |
+| Frontend end-to-end on mainnet fork | markets, account, supply, borrow and liquidation all confirmed on-chain |
 
 ## Documents
 
