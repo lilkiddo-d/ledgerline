@@ -74,6 +74,12 @@ Optional env vars: `LEDGERLINE_GUARDIAN`, `LEDGERLINE_TREASURY`, `LEDGERLINE_KEE
 cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account ledgerline-deployer --sender $(cast wallet address --account ledgerline-deployer) --resume --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
 ```
 
+**Sourcify (the route that worked for the 2026-10-09 mainnet deploy).** Sourcify supports chain 4663 and isn't behind Cloudflare, and Blockscout imports Sourcify-verified source. No key is needed. Run this for each contract created in `broadcast/Deploy.s.sol/4663/run-latest.json`:
+
+```bash
+forge verify-contract <ADDRESS> src/core/Pool.sol:Pool --chain-id 4663 --verifier sourcify --watch
+```
+
 If that still fails, verify manually in the browser. Run `bash scripts/verification-inputs.sh`, which writes `deployments/verify/<Contract>.json`. Then, for each address in `deployments/4663.json`, open its Blockscout page and choose **Verify & Publish** → **Solidity (Standard JSON input)**, compiler **v0.8.28**, and upload the matching file. Constructor arguments are read from the creation transaction.
 
 Commit `deployments/4663.json` and `app/src/generated/deployment.json`. The frontend build reads the latter.
