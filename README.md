@@ -57,6 +57,9 @@ docs/        SLITHER.md, LIQUIDATIONS.md, full Slither report
 ## Quickstart
 
 ```bash
+# fresh clone (OpenZeppelin is a git submodule)
+git clone --recursive https://github.com/lilkiddo-d/ledgerline.git && cd ledgerline
+
 # contracts
 cd contracts
 forge build --sizes
